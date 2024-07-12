@@ -115,15 +115,16 @@ def main():
     while True:
         opcao = menu()
         
-        if opcao == "d":
-            valor = float(input("Informe o valor do depósito: "))
+        match opcao:
+            case "d":
+                 valor = float(input("Informe o valor do depósito: "))
 
-            saldo, extrato = depositar(saldo, valor, extrato)
+                 saldo, extrato = depositar(saldo, valor, extrato)
+            
+            case "s":
+                valor = float(input("Informe o valor do saque: "))
 
-        elif opcao == "s":
-            valor = float(input("Informe o valor do saque: "))
-
-            saldo, extrato = sacar(
+                saldo, extrato = sacar(
                 saldo=saldo,
                 valor=valor,
                 extrato=extrato,
@@ -132,27 +133,27 @@ def main():
                 limite_saques=LIMITE_SAQUES,
             )
 
-        elif opcao == "e":
-            exibir_extrato(saldo, extrato=extrato)
+            case "e":
+                exibir_extrato(saldo, extrato=extrato)
 
-        elif opcao == "nu":
-            criar_usuario(usuarios)
+            case "nu":
+                criar_usuario(usuarios)
 
-        elif opcao == "nc":
-            numero_conta = len(contas) + 1
-            conta = criar_conta(AGENCIA, numero_conta, usuarios)
+            case "nc":
+                numero_conta = len(contas) + 1
+                conta = criar_conta(AGENCIA, numero_conta, usuarios)
 
-            if conta:
-                contas.append(conta)
+                if conta:
+                    contas.append(conta)
 
-        elif opcao == "lc":
-            listar_contas(contas)
+            case "lc":
+                listar_contas(contas)
 
-        elif opcao == "q":
-            break
+            case "q":
+                break
 
-        else:
-            print("Operação inválida, por favor selecione novamente a operação desejada.")
+            case _:
+                print("Operação inválida, por favor selecione novamente a operação desejada.")
 
 
 main()
